@@ -1,4 +1,4 @@
-**** Telegram Messaging Web Service
+## Telegram Messaging Web Service
 
 This is a web service that enables communication between a user of the service via a Telegram bot. The user can send messages to the bot, which are then saved by the web service. The user of the web service can respond to the messages.
 
