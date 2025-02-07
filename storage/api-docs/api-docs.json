@@ -1,0 +1,123 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Telegram Messaging API",
+        "description": "API for managing messages between users and guests via a Telegram bot. This API allows to receive messages from users, store them, and send replies through the Telegram bot",
+        "version": "latest"
+    },
+    "paths": {
+        "/messages": {
+            "get": {
+                "summary": "Get all messages",
+                "description": "Retrieve all the messages from the system, optionally filtered by chat_id",
+                "operationId": "a7421250a2ab3a3938c1aded041259e6",
+                "parameters": [
+                    {
+                        "name": "chat_id",
+                        "in": "query",
+                        "description": "Filter messages by chat_id",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of messages",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Message"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/messages/reply": {
+            "post": {
+                "summary": "Send a reply to a message",
+                "description": "Send a reply to a message from a user via the Telegram bot",
+                "operationId": "4ae7db418cebd20ff61d19a63b7101c4",
+                "requestBody": {
+                    "description": "The message data required to send a reply",
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "chat_id": {
+                                        "description": "The chat ID to reply to",
+                                        "type": "integer"
+                                    },
+                                    "message": {
+                                        "description": "The message content to send",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Successfully sent the reply",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "ok": {
+                                            "description": "Indicates if the message was successfully sent",
+                                            "type": "boolean"
+                                        },
+                                        "result": {
+                                            "description": "The result object containing the details of the sent message",
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Message": {
+                "description": "Message object",
+                "properties": {
+                    "id": {
+                        "description": "ID",
+                        "type": "integer"
+                    },
+                    "chat_id": {
+                        "description": "The chat ID",
+                        "type": "integer"
+                    },
+                    "message_id": {
+                        "description": "The message ID",
+                        "type": "integer"
+                    },
+                    "message": {
+                        "description": "The message content",
+                        "type": "string"
+                    },
+                    "date": {
+                        "description": "The message date",
+                        "type": "integer"
+                    }
+                },
+                "type": "object"
+            }
+        }
+    }
+}
